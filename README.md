@@ -121,5 +121,5 @@ Each plant keeps track of its watering history.
 | `pnpm start`       | Run the production build                     |
 | `pnpm db:generate` | Generate a new migration from schema changes |
 | `pnpm db:migrate`  | Apply pending migrations to the database     |
-| `pnpm db:studio`   | Open Drizzle Studio (visual DB browser)      | \
+| `pnpm db:studio`   | Open Drizzle Studio (visual DB browser)      | ||
 
