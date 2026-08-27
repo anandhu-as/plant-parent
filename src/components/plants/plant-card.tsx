@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { statusStyles } from "@/lib/watering-status-styles";
 import type { Plant } from "@/lib/db/schema";
 import { getWateringStatus } from "@/lib/freshness";
 import { markWateredAction, removePlantAction } from "@/app/actions/plant";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { useUiStore } from "@/store/ui-store";
 import { useEditPlantStore } from "@/store/edit-plant-store";
+import Image from "next/image";
 
 type PlantWithLastWatered = Plant & { lastWateredAt: Date | null };
 
@@ -15,7 +15,6 @@ const PlantCard = ({ token, plant, index = 0 }: { token: string; plant: PlantWit
   const zenMode = useUiStore((s) => s.zenMode);
   const { openEdit } = useEditPlantStore();
   const info = getWateringStatus(plant.lastWateredAt, plant.wateringIntervalDays);
-  const style = statusStyles[info.status];
   const [careOpen, setCareOpen] = useState(false);
 
   return (
@@ -30,7 +29,7 @@ const PlantCard = ({ token, plant, index = 0 }: { token: string; plant: PlantWit
       <div className="flex items-center gap-4 mb-4">
         <div className={`shrink-0 h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden shadow-inner flex items-center justify-center transition-colors duration-500 ${zenMode ? "bg-stone-800" : "bg-stone-100"}`}>
           {plant.imageUrl ? (
-            <img src={plant.imageUrl} alt={plant.name} className="h-full w-full object-cover" />
+            <Image src={plant.imageUrl} alt={plant.name} width={80} height={80} className="h-full w-full object-cover" unoptimized />
           ) : (
             <span className="text-4xl">{plant.emoji}</span>
           )}

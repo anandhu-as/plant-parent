@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import HouseholdHeader from "@/components/household/household-header";
 import PlantList from "@/components/plants/plant-list";
 import type { RememberedHousehold } from "@/lib/household-list";
-import type { Plant } from "@/lib/db/schema";
+import type { Plant, Household } from "@/lib/db/schema";
 import RememberHousehold from "@/components/household/remember-household";
 import WelcomePopup from "@/components/ui/welcome-popup";
 import { useUiStore } from "@/store/ui-store";
@@ -19,7 +19,7 @@ export default function HouseholdClient({
   origin,
   plantIdEnabled,
 }: {
-  household: any;
+  household: Household;
   plants: PlantWithLastWatered[];
   token: string;
   households: RememberedHousehold[];
