@@ -5,6 +5,7 @@ import ShareLink from "@/components/household/share-link";
 import AddPlantForm from "@/components/plants/add-plant-form";
 import type { RememberedHousehold } from "@/lib/household-list";
 import { useUiStore } from "@/store/ui-store";
+import Link from "next/link";
 
 const HouseholdHeader = ({
   name,
@@ -35,13 +36,13 @@ const HouseholdHeader = ({
         <div className="flex flex-wrap items-center gap-3">
           <HouseholdSwitcher current={token} households={households} />
           <ShareLink token={token} origin={origin} />
-          <a
+          <Link
             href="/?new=1"
             className={`flex items-center justify-center h-10 w-10 rounded-full transition cursor-pointer shadow-sm hover:shadow ${zenMode ? "bg-stone-700/60 text-stone-300 hover:bg-stone-600 hover:text-stone-100" : "bg-emerald-100/80 text-emerald-700 hover:bg-emerald-200 hover:text-emerald-800"}`}
             aria-label="New Household"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </a>
+          </Link>
           <AddPlantForm token={token} plantIdEnabled={plantIdEnabled} />
 
           <button

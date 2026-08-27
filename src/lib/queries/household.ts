@@ -1,9 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { households } from "../db/schema";
-import { generateHouseholdToken, HOUSEHOLDS_COOKIE } from "../token";
-import { parseHouseholdList } from "../household-list";
-import { cookies } from "next/headers";
+import { generateHouseholdToken } from "../token";
 const houseHoldName: string = "Ente veed";
 //pushing the token and HouseHoldName into db 
 export const createHouseHold = async (name: string = houseHoldName) => {
