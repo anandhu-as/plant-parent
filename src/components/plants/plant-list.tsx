@@ -14,12 +14,16 @@ const PlantList = ({ token, plants, plantIdEnabled }: { token: string; plants: P
 
   if (plants.length === 0) {
     return (
-      <div className={`rounded-2xl border-2 border-dashed py-16 text-center shadow-inner relative overflow-hidden transition-colors duration-500 ${zenMode ? "border-stone-700 bg-stone-800/20 text-stone-400" : "border-emerald-200 bg-emerald-50/30 text-emerald-700"}`}>
-        <div className="absolute top-2 left-2 opacity-20 text-6xl transform rotate-45">✿</div>
-        <div className="absolute bottom-2 right-2 opacity-20 text-6xl transform -rotate-12">❀</div>
-        <div className="mb-3 text-5xl">🪴</div>
-        <p className="font-medium text-lg">No plants yet!</p>
-        <p className={`mt-1 transition-colors duration-500 ${zenMode ? "text-stone-500" : "text-emerald-600"}`}>Add your first flowery friend below.</p>
+      <div className={`relative overflow-hidden rounded-[2rem] border border-dashed px-6 py-14 text-center shadow-sm transition-colors duration-500 ${zenMode ? "border-stone-700 bg-stone-800/30 text-stone-300" : "border-emerald-200 bg-white/80 text-stone-700"}`}>
+        <div className="absolute -left-4 top-2 text-7xl opacity-10">🪴</div>
+        <div className="absolute -right-4 bottom-2 text-7xl opacity-10">🌿</div>
+        <div className="relative mx-auto max-w-md">
+          <div className="mb-4 text-5xl">🌱</div>
+          <p className="text-xl font-semibold">No plants added yet</p>
+          <p className={`mt-2 text-sm leading-6 transition-colors duration-500 ${zenMode ? "text-stone-400" : "text-stone-600"}`}>
+            Start by adding your first plant to track watering, save care notes, and keep the whole household on the same page.
+          </p>
+        </div>
       </div>
     );
   }

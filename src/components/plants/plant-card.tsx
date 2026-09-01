@@ -17,85 +17,109 @@ const PlantCard = ({ token, plant, index = 0 }: { token: string; plant: PlantWit
   const info = getWateringStatus(plant.lastWateredAt, plant.wateringIntervalDays);
   const [careOpen, setCareOpen] = useState(false);
 
+  const statusTone =
+    info.daysUntilDue === null
+      ? zenMode
+        ? "bg-stone-800 text-stone-200"
+        : "bg-stone-100 text-stone-700"
+      : info.daysUntilDue < 0
+        ? zenMode
+          ? "bg-rose-950/40 text-rose-200"
+          : "bg-rose-100 text-rose-700"
+        : info.daysUntilDue === 0
+          ? zenMode
+            ? "bg-amber-950/50 text-amber-200"
+            : "bg-amber-100 text-amber-800"
+          : zenMode
+            ? "bg-emerald-950/40 text-emerald-200"
+            : "bg-emerald-100 text-emerald-700";
+
   return (
     <li
-      className={`relative py-6 px-4 -mx-4 group border-b last:border-0 rounded-2xl transition-all duration-300 hover:scale-[1.01] hover:shadow-sm animate-pop-in opacity-0 ${zenMode
-        ? "border-stone-700/50 hover:bg-stone-800/50"
-        : "border-stone-200 hover:bg-stone-50"
+      className={`group rounded-[2rem] border p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md animate-pop-in opacity-0 sm:p-6 ${zenMode
+        ? "border-stone-700 bg-[#2b2722]"
+        : "border-white/80 bg-white/90"
         }`}
       style={{ animationDelay: `${index * 75}ms` }}
     >
-
-      <div className="flex items-center gap-4 mb-4">
-        <div className={`shrink-0 h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden shadow-inner flex items-center justify-center transition-colors duration-500 ${zenMode ? "bg-stone-800" : "bg-stone-100"}`}>
-          {plant.imageUrl ? (
-            <Image src={plant.imageUrl} alt={plant.name} width={80} height={80} className="h-full w-full object-cover" unoptimized />
-          ) : (
-            <span className="text-4xl">{plant.emoji}</span>
-          )}
-        </div>
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div className="min-w-0 flex-1">
-          <div className={`truncate font-bold text-xl md:text-2xl tracking-tight transition-colors duration-500 ${zenMode ? "text-amber-50" : "text-stone-900"}`}>{plant.name}</div>
-          {plant.species && (
-            <div className={`truncate text-sm md:text-base mt-0.5 transition-colors duration-500 ${zenMode ? "text-stone-400" : "text-stone-500"}`}>{plant.species}</div>
-          )}
-        </div>
-      </div>
-
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-2">
-        <div>
-          <div className={`font-semibold text-lg transition-colors duration-500 ${zenMode ? "text-stone-200" : "text-stone-800"}`}>
-            {info.daysUntilDue === null
-              ? "Not watered yet"
-              : info.daysUntilDue < 0
-                ? `Overdue by ${Math.abs(info.daysUntilDue)} days`
-                : info.daysUntilDue === 0
-                  ? "Water today"
-                  : `Water in ${info.daysUntilDue} days`}
+          <div className="flex items-start gap-4">
+            <div className={`flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl shadow-inner transition-colors duration-500 sm:h-20 sm:w-20 ${zenMode ? "bg-stone-800" : "bg-stone-100"}`}>
+              {plant.imageUrl ? (
+                <Image src={plant.imageUrl} alt={plant.name} width={80} height={80} className="h-full w-full object-cover" unoptimized />
+              ) : (
+                <span className="text-4xl">{plant.emoji}</span>
+              )}
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className={`truncate text-xl font-semibold tracking-tight sm:text-2xl transition-colors duration-500 ${zenMode ? "text-amber-50" : "text-stone-950"}`}>
+                  {plant.name}
+                </h3>
+                <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${statusTone}`}>
+                  {info.daysUntilDue === null
+                    ? "Needs first watering"
+                    : info.daysUntilDue < 0
+                      ? `Overdue ${Math.abs(info.daysUntilDue)}d`
+                      : info.daysUntilDue === 0
+                        ? "Water today"
+                        : `Due in ${info.daysUntilDue}d`}
+                </span>
+              </div>
+              {plant.species && (
+                <p className={`mt-1 truncate text-sm sm:text-base transition-colors duration-500 ${zenMode ? "text-stone-400" : "text-stone-500"}`}>
+                  {plant.species}
+                </p>
+              )}
+              <div className={`mt-3 grid gap-2 text-sm sm:grid-cols-2 ${zenMode ? "text-stone-400" : "text-stone-600"}`}>
+                <p>
+                  {info.daysSinceWatered === null
+                    ? "Never watered"
+                    : info.daysSinceWatered === 0
+                      ? "Watered today"
+                      : `Watered ${info.daysSinceWatered} days ago`}
+                </p>
+                <p>Water every {plant.wateringIntervalDays} day{plant.wateringIntervalDays === 1 ? "" : "s"}</p>
+              </div>
+            </div>
           </div>
-          <div className={`text-sm mt-0.5 transition-colors duration-500 ${zenMode ? "text-stone-500" : "text-stone-500"}`}>
-            {info.daysSinceWatered === null
-              ? "Never watered"
-              : info.daysSinceWatered === 0
-                ? "Watered today"
-                : `Watered ${info.daysSinceWatered} days ago`}
-            {" "}• every ~{plant.wateringIntervalDays} days
-          </div>
         </div>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto mt-2 sm:mt-0">
-          <form action={markWateredAction.bind(null, token, plant.id)} className="flex-1 sm:flex-none">
+        <div className="flex flex-col gap-2 sm:flex-row lg:flex-col lg:items-stretch">
+          <form action={markWateredAction.bind(null, token, plant.id)} className="sm:flex-1 lg:flex-none">
             <SubmitButton
-              pendingText="..."
-              className="w-full justify-center rounded-full bg-[#1da1f2] hover:bg-[#1a91da] text-white px-5 py-2.5 font-semibold text-sm transition-colors shadow-sm flex items-center gap-2 cursor-pointer"
+              pendingText="Saving..."
+              className="inline-flex w-full justify-center rounded-2xl bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white transition-colors shadow-sm hover:bg-emerald-800 cursor-pointer"
             >
-              Mark watered 💧
+              Mark watered
             </SubmitButton>
           </form>
 
-          <button
-            type="button"
-            onClick={() => openEdit(plant)}
-            className={`p-2 rounded-full transition cursor-pointer ${zenMode ? "text-stone-500 hover:bg-stone-700 hover:text-amber-200" : "text-stone-400 hover:bg-amber-100 hover:text-amber-600"}`}
-            aria-label={`Edit ${plant.name}`}
-            title="Edit plant"
-          >
-            ✏️
-          </button>
-          <form action={removePlantAction.bind(null, token, plant.id)}>
-            <SubmitButton
-              className={`p-2 rounded-full transition cursor-pointer ${zenMode ? "text-stone-600 hover:bg-stone-700 hover:text-stone-400" : "text-stone-400 hover:bg-stone-100 hover:text-stone-500"}`}
-              aria-label={`Remove ${plant.name}`}
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => openEdit(plant)}
+              className={`inline-flex items-center justify-center rounded-2xl px-4 py-2.5 text-sm font-medium transition cursor-pointer ${zenMode ? "bg-stone-800 text-stone-200 hover:bg-stone-700" : "bg-stone-100 text-stone-700 hover:bg-stone-200"}`}
+              aria-label={`Edit ${plant.name}`}
+              title="Edit plant"
             >
-              ❌
-            </SubmitButton>
-          </form>
+              Edit
+            </button>
+            <form action={removePlantAction.bind(null, token, plant.id)} className="flex-1">
+              <SubmitButton
+                className={`inline-flex w-full items-center justify-center rounded-2xl px-4 py-2.5 text-sm font-medium transition cursor-pointer ${zenMode ? "bg-stone-800 text-rose-300 hover:bg-stone-700" : "bg-rose-50 text-rose-700 hover:bg-rose-100"}`}
+                aria-label={`Remove ${plant.name}`}
+              >
+                Remove
+              </SubmitButton>
+            </form>
+          </div>
         </div>
       </div>
-
 
       {plant.careGuide && (
-        <div className="mt-4">
+        <div className={`mt-5 border-t pt-4 ${zenMode ? "border-stone-700/70" : "border-stone-200"}`}>
           <button
             type="button"
             onClick={() => setCareOpen((o) => !o)}
