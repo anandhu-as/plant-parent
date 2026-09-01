@@ -124,7 +124,7 @@ const HouseholdSwitcher = ({
         <button
           type="button"
           onClick={toggleOpen}
-          className="inline-flex items-center gap-2 rounded-2xl bg-stone-100 px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:bg-stone-200 cursor-pointer shadow-sm"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-stone-100 px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:bg-stone-200 cursor-pointer shadow-sm"
         >
           Switch household
           <svg
