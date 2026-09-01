@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { HOUSEHOLDS_COOKIE } from "@/lib/token";
 import { parseHouseholdList } from "@/lib/household-list";
 import CreateHouseholdForm from "@/components/household/create-household-form";
-import { APP_DESC } from "@/constants";
+import { APP_NAME, APP_DESC } from "@/constants";
 import WelcomeToast from "@/components/ui/welcome-toast";
 
 const Home = async ({
@@ -27,11 +27,14 @@ const Home = async ({
           <div className="max-w-2xl">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-4 py-2 text-sm font-medium text-emerald-800 shadow-sm backdrop-blur">
               <span className="text-base">🪴</span>
-              Shared plant care made simple
+              Welcome to {APP_NAME}
             </div>
             <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-stone-950 sm:text-5xl lg:text-6xl">
-              Keep every plant healthy without the chaos
+              {APP_NAME}
             </h1>
+            <p className="mt-3 max-w-xl text-xl font-medium text-stone-700 sm:text-2xl">
+              Keep every plant healthy without the chaos
+            </p>
             <p className="mt-5 max-w-xl text-base leading-7 text-stone-600 sm:text-lg">
               {APP_DESC} Create one shared household, add your plants, and see exactly what needs attention today.
             </p>

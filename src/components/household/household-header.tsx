@@ -27,34 +27,31 @@ const HouseholdHeader = ({
   return (
     <div className="mb-8 flex flex-col gap-6">
       <header className={`rounded-[2rem] border p-5 shadow-sm transition-colors duration-500 sm:p-6 ${zenMode ? "border-stone-700 bg-[#2e2924]" : "border-white/70 bg-white/90"}`}>
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
-          <div className="min-w-0 flex-1">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
+          <div className="min-w-0">
             <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${zenMode ? "bg-emerald-900/40 text-emerald-300" : "bg-emerald-50 text-emerald-700"}`}>
               Household overview
             </div>
 
-            <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-              <div className="min-w-0">
-                <h1 className={`truncate text-3xl font-semibold tracking-tight sm:text-4xl transition-colors duration-500 ${zenMode ? "text-amber-50" : "text-stone-950"}`} title={name}>
-                  {name}
-                </h1>
-                <p className={`mt-2 text-sm transition-colors duration-500 ${zenMode ? "text-stone-400" : "text-stone-500"}`}>
-                  Organize watering, notes, and shared plant care in one place.
-                </p>
-              </div>
+            <h1 className={`mt-4 truncate text-3xl font-semibold tracking-tight sm:text-4xl transition-colors duration-500 ${zenMode ? "text-amber-50" : "text-stone-950"}`} title={name}>
+              {name}
+            </h1>
 
-              <div className="flex flex-wrap gap-2">
-                <p className={`inline-flex items-center rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-500 ${zenMode ? "bg-stone-800 text-stone-200" : "bg-stone-100 text-stone-700"}`}>
-                  {plantCount} plant{plantCount === 1 ? "" : "s"}
-                </p>
-                <p className={`inline-flex items-center rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-500 ${zenMode ? "bg-emerald-900/40 text-emerald-300" : "bg-emerald-50 text-emerald-700"}`}>
-                  Shared care space
-                </p>
-              </div>
+            <p className={`mt-2 max-w-2xl text-sm leading-6 transition-colors duration-500 ${zenMode ? "text-stone-400" : "text-stone-500"}`}>
+              Organize watering, notes, and shared plant care in one place.
+            </p>
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              <p className={`inline-flex items-center rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-500 ${zenMode ? "bg-stone-800 text-stone-200" : "bg-stone-100 text-stone-700"}`}>
+                {plantCount} plant{plantCount === 1 ? "" : "s"}
+              </p>
+              <p className={`inline-flex items-center rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-500 ${zenMode ? "bg-emerald-900/40 text-emerald-300" : "bg-emerald-50 text-emerald-700"}`}>
+                Shared care space
+              </p>
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 xl:w-[420px]">
+          <div className="grid gap-3 sm:grid-cols-2">
             <AddPlantForm token={token} plantIdEnabled={plantIdEnabled} />
             <HouseholdSwitcher current={token} households={households} />
             <ShareLink token={token} origin={origin} />
@@ -70,7 +67,7 @@ const HouseholdHeader = ({
                 type="button"
                 onClick={toggleZenMode}
                 title={zenMode ? "Switch to Light mode" : "Switch to Dark mode"}
-                className={`flex h-10 w-10 items-center justify-center rounded-full transition cursor-pointer shadow-sm hover:shadow ${zenMode ? "bg-amber-900/50 text-amber-300 hover:bg-amber-800/60 hover:text-amber-200" : "bg-stone-200/80 text-stone-600 hover:bg-stone-300 hover:text-stone-800"}`}
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition cursor-pointer shadow-sm hover:shadow ${zenMode ? "bg-amber-900/50 text-amber-300 hover:bg-amber-800/60 hover:text-amber-200" : "bg-stone-200/80 text-stone-600 hover:bg-stone-300 hover:text-stone-800"}`}
                 aria-label="Toggle dark mode"
               >
                 {zenMode ? (

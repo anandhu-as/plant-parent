@@ -98,7 +98,7 @@ export default function HouseholdClient({
   return (
     <main className={`min-h-screen transition-colors duration-500 ${zenMode ? "bg-[#24211e]" : "bg-[#f5f1ea]"} p-5 sm:p-10`}>
       <WelcomePopup householdName={household.name} />
-      <div className="mx-auto max-w-2xl space-y-8">
+      <div className="mx-auto max-w-5xl space-y-8">
         <RememberHousehold token={token} name={household.name} />
         <HouseholdHeader
           name={household.name}
