@@ -41,7 +41,12 @@ const HouseholdHeader = ({
             className={`flex items-center justify-center h-10 w-10 rounded-full transition cursor-pointer shadow-sm hover:shadow ${zenMode ? "bg-stone-700/60 text-stone-300 hover:bg-stone-600 hover:text-stone-100" : "bg-emerald-100/80 text-emerald-700 hover:bg-emerald-200 hover:text-emerald-800"}`}
             aria-label="New Household"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M13.22 2.416a2 2 0 0 0-2.511.057l-7 5.999A2 2 0 0 0 3 10v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7.354"/>
+              <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
+              <path d="M15 6h6"/>
+              <path d="M18 3v6"/>
+            </svg>
           </Link>
           <AddPlantForm token={token} plantIdEnabled={plantIdEnabled} />
 
