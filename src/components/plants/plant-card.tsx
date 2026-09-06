@@ -36,7 +36,7 @@ const PlantCard = ({ token, plant, index = 0 }: { token: string; plant: PlantWit
 
   return (
     <li
-      className={`group rounded-[2rem] border p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md animate-pop-in opacity-0 sm:p-6 ${zenMode
+      className={`group rounded-[2rem] border p-4 sm:p-6 md:p-8 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg animate-pop-in opacity-0 ${zenMode
         ? "border-stone-700 bg-[#2b2722]"
         : "border-white/80 bg-white/90"
         }`}
