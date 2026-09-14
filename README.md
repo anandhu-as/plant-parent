@@ -1,5 +1,4 @@
 # 🪴 plant-parent
-
 A shared, no-login plant-watering tracker for households. Create a household, get a secret link, and anyone with that link can add plants and log waterings — no accounts, no passwords
 
 ## How it works
